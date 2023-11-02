@@ -29,7 +29,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} container mx-auto`} >
         <SessionProvider session={session}>
           <Navbar />
           <main className='relative'>

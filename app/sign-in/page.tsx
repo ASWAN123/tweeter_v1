@@ -40,7 +40,7 @@ const Page = () => {
 
   useEffect(() => {
     if(session){
-      redirect("/")
+      redirect("/profile")
     }
   } ,  [session])
 
