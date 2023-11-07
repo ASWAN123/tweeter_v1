@@ -80,23 +80,23 @@ const Page = () => {
 
 
   return (
-    <div className=" container mx-auto mt-8 ">
+    <div className=" container mx-auto  absolute top-1/2 left-1/2  transform -translate-x-1/2 translate-y-[30%]">
     
       <form className=" max-w-lg mx-auto bg-white shadow p-4 rounded-md space-y-6 " onSubmit={handleSubmit(onSubmit)}>
-        <h1 className="text-2xl font-medium leading-6 text-gray-900 text-center my-6">Sign In</h1>
-        <div className="my-6">
+        <h1 className="text-4xl  text-neutral-500  ">Sign In</h1>
+        <div className="my-6 ">
           <label
             htmlFor="email"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
-            Your email
+            Email
           </label>
           <input
             type="email"
             id="email"
             {...register("email")}
-            className="bg-gray-50 border outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-            placeholder="name@flowbite.com"
+            className="bg-gray-50 border outline-none  text-gray-900 text-sm rounded-md w-full p-2.5 "
+            placeholder="example@gmail.com"
             
           />
           {errors.email &&  <p className="text-sm text-red-400 my-1 pl-2">{errors.email?.message}</p> }
@@ -106,22 +106,23 @@ const Page = () => {
             htmlFor="password"
             className="block mb-2 text-sm font-medium text-gray-900 "
           >
-            Your password
+            Password
           </label>
           <input
             type="text"
             id="password"
             {...register("password")}
             placeholder="* * * * * * * *"
-            className="bg-gray-50 border  outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+            className="bg-gray-50 border outline-none  text-gray-900 text-sm rounded-md w-full p-2.5 "
             
           />
           {errors.password &&  <p className="text-sm text-red-400 my-1 pl-2">{errors.password?.message}</p> }
         </div>
 
-        <button type="submit" className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300  font-medium rounded-lg text-sm px-6 py-2.5 text-center  mb-2 w-fit border   leading-6">Login</button>
+        <button type="submit" className="text-black   font-medium rounded-md text-sm px-6 py-2.5 text-center  mb-2 w-fit border leading-6">Login</button>
       </form>
     </div>
+    
   );
 };
 

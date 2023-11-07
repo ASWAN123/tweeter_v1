@@ -33,14 +33,14 @@ const Navbar = () => {
           <p className="font-bold text-lg">Tweeter</p>
         </Link>
 
-        <ul className="flex  space-x-10 ">
-          <li>
+        <ul className="flex  space-x-10  text-neutral-500 ">
+          <li className=" font-semibold ">
             <Link href="/home">Home</Link>
           </li>
-          <li>
+          <li className=" font-semibold ">
             <Link href="/explore">Explore</Link>
           </li>
-          <li>
+          <li className=" font-semibold ">
             <Link href="/bookmarks">Bookmarks</Link>
           </li>
         </ul>
