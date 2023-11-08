@@ -3,6 +3,8 @@ import Poststatic from "../componenets/Poststatic";
 import Postactions from "../componenets/Postactions";
 import Commentform from "../componenets/Commentform";
 import Postdetails from "../componenets/Postdetails";
+import Comment from "../componenets/Comment";
+
 
 const Post = () => {
     return (
@@ -24,12 +26,18 @@ const Post = () => {
             </div>
 
             < Postdetails />
+            <div className="w-full flex  flex-col gap-1 ">
+                <Poststatic />
+                <hr />
 
-            <Poststatic />
+                <Postactions />
+                <hr />
 
-            <Postactions />
+                <Commentform />
+                <hr />
+            </div>
 
-            <Commentform />
+            <Comment />
         </div>
     );
 };

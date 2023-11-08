@@ -2,7 +2,7 @@
 
 const Postactions = () => {
   return (
-    <div className="flex justify-between gap-4 items-center px-2 border-y-2 py-1 text-gray-500">
+    <div className="flex justify-between gap-2 items-center  text-gray-500">
     <button className="flex gap-3 items-center hover:cursor-pointer hover:bg-neutral-200  p-2 px-6 rounded-md ">
         <svg
             xmlns="http://www.w3.org/2000/svg"
