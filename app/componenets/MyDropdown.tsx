@@ -4,7 +4,7 @@ import { BsFillPeopleFill } from "react-icons/bs";
 
 export default function MyDropdown() {
     return (
-        <Menu as="dev"  className="relative ">
+        <Menu as="div"  className="relative ">
             <Menu.Button className="flex items-center gap-2">
                 <BiWorld size={24} color="blue" />
                 Everyone can reply

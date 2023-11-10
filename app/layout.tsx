@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from './Navbar'
-
+import { EdgeStoreProvider } from '@/app/lib/edgestore';
 const inter = Inter({ subsets: ['latin'] })
 import SessionProvider from './componenets/SessionProvider'
 import  {  getServerSession } from "next-auth"
@@ -33,7 +33,7 @@ export default async function RootLayout({
         <SessionProvider session={session}>
           <Navbar />
           <main className='relative'>
-            {children}
+          <EdgeStoreProvider>{children}</EdgeStoreProvider>
           </main>
         </SessionProvider>
 

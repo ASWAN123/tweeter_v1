@@ -1,10 +1,47 @@
+"use client" ;
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import  { AiOutlineClose  } from "react-icons/ai"
+import { Fragment, useState  , SetStateAction , Dispatch  , ReactNode, useEffect } from "react";
+import { useEdgeStore } from "../lib/edgestore";
+import Link from "next/link";
 
-export default function MyModal({ isOpen , setIsOpen  }) {
-    function closeModal() {
+interface MyComponentProps {
+    isOpen: boolean;
+    setIsOpen: Dispatch<SetStateAction<boolean>>;
+    urls: string[];
+    setUrls: Dispatch<SetStateAction<string[]>>;
+  }
+
+
+
+const MyModal: React.FC<MyComponentProps> = ({ isOpen, setIsOpen, urls , setUrls }) => {
+
+    
+    const [file , setFile] = useState<File>() ;
+    const { edgestore } = useEdgeStore() ;
+    const [progress , setProgress] = useState(0) ;
+
+
+    useEffect(() => {
+        console.log(file)
+    } ,  [file] )
+
+
+    const  closeModal = async () => {
+        if (file){
+            const res = await edgestore.publicFiles.upload({file ,
+                onProgressChange: (progress) => {
+                    setProgress(progress)
+                    console.log(progress);
+                  },})
+            setUrls((prevUrls) => [...prevUrls, res.url]);
+
+        }
         setIsOpen(false);
+
     }
+
+
 
     return (
         <>
@@ -72,23 +109,39 @@ export default function MyModal({ isOpen , setIsOpen  }) {
                                                     PNG, JPG or GIF (MAX.
                                                     800x400px)
                                                 </p>
+
                                             </div>
                                             <input
                                                 id="dropzone-file"
                                                 type="file"
                                                 className="hidden"
+                                                accept="image/*"
+                                                multiple={false}
+                                                onChange={(e) => {
+                                                    setFile(e.target.files?.[0])
+                                                }}
                                             />
                                         </label>
                                     </div>
 
-                                    <div className="mt-4">
+                                    <div className="mt-4 flex  flex-col gap-4 ">
+                                        {/* only  one  image  allowed  because  of  the  limitation for  free  tier  of  the  service */}
+                                        {file && <div className="mt-2 flex gap-2 items-center"><p className=" text-green-500">{file.name}</p><AiOutlineClose size={20} color="red" className = " cursor-pointer hover:bg-red-300" onClick ={() => {setFile(undefined)} } />  </div> }
+                                        
+                                        {
+                                            progress > 0 &&
+                                        <div className=" w-full bg-gray-200 rounded-full dark:bg-gray-700">
+                                            <div className="bg-blue-600 text-xs font-medium transition-all duration-150 text-blue-100 text-center p-0.5 leading-none rounded-full" style={{ width: progress+"%" }} >{progress}%</div>
+                                        </div>
+}
                                         <button
                                             type="button"
-                                            className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 "
+                                            className="w-fit inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 "
                                             onClick={closeModal}
                                         >
                                             Confirm
                                         </button>
+                                        {/* {urls?[0].url && <Link href={urls.url} target="_blank" >URL</Link>} */}
                                     </div>
                                 </Dialog.Panel>
                             </Transition.Child>
@@ -99,3 +152,6 @@ export default function MyModal({ isOpen , setIsOpen  }) {
         </>
     );
 }
+
+
+export default MyModal ;

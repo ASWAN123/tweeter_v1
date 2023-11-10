@@ -11,13 +11,23 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  username String @unique
-  name     String
-  password String
-  bio      String?
-  avatar   String?
+  id         Int      @id @default(autoincrement())
+  email      String   @unique
+  username   String   @unique
+  name       String
+  password   String
+  bio        String?
+  avatar     String?
   created_at DateTime @default(now())
+  posts      Post[]
+}
 
+model Post {
+  id                 Int      @id @default(autoincrement())
+  created_at         DateTime @default(now())
+  content            String
+  everyone_can_reply Boolean
+  author             User     @relation(fields: [authorId], references: [id])
+  authorId           Int
+  media_id           Int
 }
